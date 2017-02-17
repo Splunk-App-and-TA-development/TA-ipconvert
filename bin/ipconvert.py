@@ -5,10 +5,12 @@ import sys
 import socket
 import struct
 
-def main():
-    if len(sys.argv) != 3:
-        print "Usage: python ipconvert.py [integer field] [string field]"
-        sys.exit(1)
+if len(sys.argv) != 3:
+
+    print "Usage: python ipconvert.py [integer field] [string field]"
+    sys.exit(1)
+
+else:
 
     integerfield = sys.argv[1]
     stringfield = sys.argv[2]
@@ -27,11 +29,15 @@ def main():
             w.writerow(result)
 
         elif result[integerfield]:
-            result[stringfield] = socket.inet_ntoa(struct.pack('!L', int(result[integerfield])))
+            try:
+                result[stringfield] = socket.inet_ntoa(struct.pack('!L', int(result[integerfield])))
+            except:
+                pass 
             w.writerow(result)
 
         elif result[stringfield]:
-            result[integerfield] = struct.unpack('!L', socket.inet_aton(result[stringfield]))[0]
+            try:
+                result[integerfield] = struct.unpack('!L', socket.inet_aton(result[stringfield]))[0]
+            except:
+                pass
             w.writerow(result)
-
-main()
