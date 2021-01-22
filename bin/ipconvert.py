@@ -7,7 +7,7 @@ import struct
 
 if len(sys.argv) != 3:
 
-    print "Usage: python ipconvert.py [integer field] [string field]"
+    print("Usage: python ipconvert.py [integer field] [string field]")
     sys.exit(1)
 
 else:
